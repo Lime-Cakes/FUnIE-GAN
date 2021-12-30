@@ -46,6 +46,8 @@ print("\nLoaded data and model")
 
 # testing loop
 times = []; s = time.time()
+count=0
+maxCount=10
 for img_path in test_paths:
     # prepare data
     inp_img = read_and_resize(img_path, (256, 256))
@@ -61,6 +63,9 @@ for img_path in test_paths:
     img_name = ntpath.basename(img_path)
     out_img = np.hstack((inp_img, gen_img)).astype('uint8')
     Image.fromarray(out_img).save(join(samples_dir, img_name))
+    count=count+1
+    if (count>maxCount):
+        break
 
 # some statistics    
 num_test = len(test_paths)
